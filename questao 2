@@ -1,0 +1,56 @@
+// funcao utilizada para a multiplicacao das matrizes. 
+
+
+int i,j,r;
+
+int multicacao_matrizes(int n, int matriz1[n][n], int matriz2[n][n], int result[n][n]){
+
+for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        for (int r=0;r< n; r++){
+            result[i][j]+= matriz1[i][r] * matriz2[j][r];
+        }
+          
+    }
+  }
+
+}
+
+
+
+#include <stdio.h>
+
+
+int main() {
+    
+    int n;
+    
+    
+    printf("\n\n o tamanho das matrizes tem que ser um numero inteiro\n\n"); // para facilitar.
+    printf("digite o tamanho das matrizes: \n");// solicita ao usuario o tamanho das matrizes
+    scanf("%d",&n);
+   int matriz1[n][n], matriz2[n][n], result[n][n];
+   
+    
+    printf("digite os numeros inteiros:");// preenchendo a primeira matriz
+    
+    for(i=0; i<n;i++){
+        for(j=0; j<n;j++){
+            scanf("%d  \n",&matriz1[i][j]);
+        }
+     
+    }
+    
+    for(i=0; i<n;i++){  // preenchendo a segunda matriz
+        for(j=0; j<n;j++){
+            scanf("%d \n",&matriz2[i][j]);
+        }
+    }
+    // imprime o resultado do calculo
+    
+     printf("o resultado da multiplicacao da linha e coluna e : %d \n", result[i][j]);
+
+return 0;
+
+    
+}
