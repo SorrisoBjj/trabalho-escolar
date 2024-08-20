@@ -1,0 +1,36 @@
+
+
+
+
+int somaArray(int A[], int tam) {
+    int somaA = 0;
+    for (int i = 0; i < tam; i++) {
+        somaA += A[i];
+    }
+    return somaA;
+}
+
+
+#include <stdio.h>
+
+
+
+int main() {
+    int num;
+
+    printf("Digite o tamanho do array: ");
+    scanf("%d", &num);
+
+    int A[num];
+
+    printf("Digite os números inteiros:%d \n", num);
+    for (int i = 0; i < num; i++) {
+        scanf("%d", &A[i]);
+    }
+
+    int result = somaArray(A, num);
+
+    printf("A soma é: %d\n", result);
+
+    return 0;
+}
