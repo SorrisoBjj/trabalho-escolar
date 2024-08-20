@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+// Pontos atribuídos a cada letra do alfabeto
+int PONTOS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
+
+// Função para calcular a pontuação de uma palavra
+int compute_score(char word[]);
+
+int main(void)
+{
+    char palavra1[100];
+    char palavra2[100];
+
+    // Solicita as palavras dos jogadores
+    printf("Jogador 1: ");
+    scanf("%s", palavra1);
+    printf("Jogador 2: ");
+    scanf("%s", palavra2);
+
+    // Calcula a pontuação das palavras
+    int pontuacao1 = compute_score(palavra1);
+    int pontuacao2 = compute_score(palavra2);
+
+    // Determina o vencedor do jogo
+    if (pontuacao1 > pontuacao2)
+    {
+        printf("Jogador 1 venceu!\n");
+    }
+    else if (pontuacao2 > pontuacao1)
+    {
+        printf("Jogador 2 venceu!\n");
+    }
+    else
+    {
+        printf("Empate!\n");
+    }
+
+    return 0;
+}
+
+int compute_score(char word[])
+{
+    int score = 0;
+    for (int i = 0, n = strlen(word); i < n; i++)
+    {
+        // Converte a letra para maiúscula para facilitar a otimização
+        char c = toupper(word[i]);
+        // Calcula a pontuação da letra
+        if (c >= 'A' && c <= 'Z')
+        {
+            score += PONTOS[c - 'A'];
+        }
+    }
+    return score;
+}
