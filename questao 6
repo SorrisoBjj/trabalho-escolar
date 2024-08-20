@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+//
+
+// Função para validar a chave
+int validate_key(char key[]);
+
+// Função para criptografar a mensagem
+void encrypt(char plaintext[], char key[]);
+
+int main()
+{
+    char key[27];
+    char plaintext[100];
+
+    // Solicita a chave do usuário
+    printf("Digite a chave (26 caracteres únicos): ");
+    fgets(key, sizeof(key), stdin);
+    key[strcspn(key, "\n")] = '\0'; // Remove o caractere de nova linha
+
+    // Valida a chave
+    if (!validate_key(key))
+    {
+        printf("Chave inválida. A chave deve conter 26 caracteres únicos.\n");
+        return 1;
+    }
+
+    // Solicita a mensagem do usuário
+    printf("Digite a mensagem: ");
+    fgets(plaintext, sizeof(plaintext), stdin);
+    plaintext[strcspn(plaintext, "\n")] = '\0'; // Remove o caractere de nova linha
+
+    // Criptografa a mensagem
+    encrypt(plaintext, key);
+
+    return 0;
+}
+
+int validate_key(char key[])
+{
+    // Verifica se a chave tem 26 caracteres
+    if (strlen(key) != 26)
+    {
+        return 0;
+    }
+
+    // Verifica se todos os caracteres são letras e se são únicos
+    int letters[26] = {0};
+    for (int i = 0; i < 26; i++)
+    {
+        if (!isalpha(key[i]))
+        {
+            return 0;
+        }
+        int index = toupper(key[i]) - 'A';
+        if (letters[index] > 0)
+        {
+            return 0;
+        }
+        letters[index]++;
+    }
+    return 1;
+}
+
+void encrypt(char plaintext[], char key[])
+{
+    printf("ciphertext: ");
+    for (int i = 0, n = strlen(plaintext); i < n; i++)
+    {
+        if (isalpha(plaintext[i]))
+        {
+            int index = toupper(plaintext[i]) - 'A';
+            char cipher_char = isupper(plaintext[i]) ? toupper(key[index]) : tolower(key[index]);
+            printf("%c", cipher_char);
+        }
+        else
+        {
+            printf("%c", plaintext[i]);
+        }
+    }
+    printf("\n");
+}
